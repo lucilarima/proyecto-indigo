@@ -1,0 +1,407 @@
+/* =========================================
+   1. HEREDAR DISEÑO BASE
+   ========================================= */
+/* Esto trae los estilos de tu menú lateral y barra superior desde el Dashboard */
+@import './Dashboard.css';
+
+
+/* =========================================
+   2. LAYOUT AGENDA GENERAL
+   ========================================= */
+.agenda-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+}
+
+/* --- COLUMNA IZQUIERDA (TIMELINE) --- */
+.timeline-section {
+    background-color: transparent;
+}
+
+.timeline-header {
+    margin-bottom: 40px;
+}
+
+.timeline-header h2 {
+    font-size: 2rem;
+    color: #1e1b4b;
+    margin: 0 0 5px 0;
+    font-weight: 800;
+}
+
+.timeline-header p {
+    color: #94a3b8;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Grilla de horas */
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.time-slot {
+    display: flex;
+    align-items: flex-start;
+    min-height: 80px;
+    position: relative;
+}
+
+.time-label {
+    width: 60px;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding-top: 15px;
+}
+
+.time-line {
+    width: 15px;
+    border-right: 1px dashed #cbd5e1;
+    height: 100%;
+    margin-right: 25px;
+    position: relative;
+}
+
+.time-line::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -4px;
+    width: 7px;
+    height: 7px;
+    background-color: #cbd5e1;
+    border-radius: 50%;
+}
+
+.time-content {
+    flex-grow: 1;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+
+/* Tarjeta de Tarea Programada */
+.scheduled-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border-left: 4px solid #4f46e5;
+    transition: transform 0.2s;
+}
+
+.scheduled-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.empty-slot {
+    height: 40px;
+}
+
+/* --- COLUMNA DERECHA (SIDEBAR AGENDA) --- */
+.agenda-sidebar-right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Calendario */
+.mini-calendar {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #1e1b4b;
+}
+
+.calendar-nav {
+    color: #94a3b8;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+
+.calendar-nav span {
+    padding: 0 10px;
+}
+
+.calendar-nav span:hover {
+    color: #4f46e5;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.calendar-grid span {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.calendar-grid .faded {
+    color: #cbd5e1;
+}
+
+.calendar-grid .active {
+    background-color: #a855f7;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.clickable-day {
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+    border-radius: 50%;
+}
+
+.clickable-day:hover:not(.active) {
+    background-color: #f1f5f9;
+    color: #1e1b4b;
+}
+
+/* Tareas por organizar */
+.unassigned-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.unassigned-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.unassigned-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #1e1b4b;
+}
+
+.unassigned-header span {
+    font-size: 0.85rem;
+    color: #a855f7;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.schedule-task-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    margin-bottom: 15px;
+}
+
+.schedule-task-card .badge {
+    background-color: #f3e8ff;
+    color: #a855f7;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.schedule-task-card h4 {
+    margin: 0 0 15px 0;
+    color: #1e1b4b;
+    font-size: 0.95rem;
+}
+
+.schedule-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.time-select {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    color: #64748b;
+    outline: none;
+    font-family: inherit;
+}
+
+.btn-programar {
+    background-color: #1e1b4b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-programar:disabled {
+    background-color: #cbd5e1;
+    cursor: not-allowed;
+}
+
+.btn-programar:hover:not(:disabled) {
+    background-color: #312e81;
+}
+
+.create-task-btn-large {
+    width: 100%;
+    background-color: #0f172a;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s;
+}
+
+.create-task-btn-large:hover {
+    transform: translateY(-2px);
+}
+
+.all-done-msg {
+    text-align: center;
+    color: #10b981;
+    font-weight: 600;
+    padding: 20px;
+    background: #ecfdf5;
+    border-radius: 12px;
+}
+
+/* =========================================
+   3. CLASES DE EDICIÓN Y MENÚ 3 PUNTITOS
+   ========================================= */
+
+/* Cursor para indicar que es editable */
+.card-header h4, .project-tag {
+    margin: 0 0 5px 0;
+    color: #1e1b4b;
+    font-size: 1.1rem;
+    cursor: text;
+    transition: color 0.2s;
+}
+
+.project-tag {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.card-header h4:hover, .project-tag:hover {
+    color: #4f46e5;
+}
+
+.more-btn {
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* Inputs invisibles para la edición en línea */
+.inline-edit-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #4f46e5;
+    outline: none;
+    font-family: inherit;
+    width: 100%;
+}
+
+.inline-edit-input.title-edit {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1e1b4b;
+    margin-bottom: 5px;
+}
+
+.inline-edit-input.desc-edit {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 0;
+}
+
+/* Menú flotante de los 3 puntitos */
+.more-menu-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.dropdown-menu button {
+    background: none;
+    border: none;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1e1b4b;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.dropdown-menu button:hover {
+    background-color: #f1f5f9;
+}
+
+.dropdown-menu button.danger-text {
+    color: #ef4444;
+    border-top: 1px solid #f1f5f9;
+}
+
+.dropdown-menu button.danger-text:hover {
+    background-color: #fef2f2;
+}

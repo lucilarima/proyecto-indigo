@@ -1,0 +1,117 @@
+/* --- ESTILOS ESPECÍFICOS PARA LA LANDING --- */
+.landing-container {
+    min-height: 100vh;
+    width: 100vw;
+    background-color: transparent; /* Para ver el fondo vibrante del JSX */
+    font-family: 'Inter', sans-serif; 
+    display: flex;
+    flex-direction: column;
+    
+    /* ESTO ARREGLA EL CENTRADO: Forzamos la alineación a la izquierda */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Navegación */
+.landing-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 80px;
+}
+
+.landing-logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: white; /* Mantener blanco para contraste */
+}
+
+.nav-signin {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Cuerpo de la página - Recuperamos el alineado a la izquierda */
+.landing-hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 80px; /* Margen izquierdo amplio */
+    justify-content: flex-start; /* Asegura que el contenido no se centre */
+}
+
+.hero-content {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alineación interna a la izquierda */
+    text-align: left;
+}
+
+/* Tipografías en Blanco */
+.hero-title {
+    font-size: 5rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin: 0 0 30px 0;
+    letter-spacing: -2px;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    line-height: 1.6;
+    max-width: 550px;
+    margin-bottom: 50px;
+    opacity: 0.9;
+}
+
+/* --- BOTONES GLASSMORPHISM --- */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.btn-violet {
+    background-color: rgba(99, 102, 241, 0.3);
+    color: white;
+    text-decoration: none;
+    padding: 18px 35px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-violet:hover {
+    background-color: rgba(99, 102, 241, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    padding: 18px 35px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}

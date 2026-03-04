@@ -1,0 +1,481 @@
+/* =========================================
+   NUEVO LAYOUT: CLEAN UI / SOFT DASHBOARD
+   ========================================= */
+
+/* --- LAYOUT GENERAL --- */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    /* Un gris muy clarito para el exterior */
+    background-color: #eef2f6; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; 
+}
+
+/* --- BARRA LATERAL (SIDEBAR) --- */
+.sidebar {
+    width: 250px; 
+    background-color: transparent; 
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0 40px 15px; 
+}
+
+.sidebar-brand {
+    padding: 0 30px;
+    margin-bottom: 50px;
+}
+
+.sidebar-brand h1 {
+    font-size: 2rem; 
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #2b3674; /* Azul oscuro corporativo de tu imagen */
+    margin: 0;
+}
+
+/* --- NAVEGACIÓN LATERAL --- */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 15px;
+    flex-grow: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 20px; 
+    color: #a3aed1; /* Gris azulado para los inactivos */
+    text-decoration: none;
+    font-size: 0.95rem; 
+    font-weight: 600;
+    border-radius: 16px;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+    color: #4318ff; /* Azul/Violeta brillante de tu imagen */
+}
+
+.nav-item.active {
+    background-color: #ffffff; /* Píldora blanca */
+    color: #4318ff;
+    font-weight: 700;
+    box-shadow: 0 5px 14px rgba(112, 144, 176, 0.08); /* Sombra sutil */
+}
+
+.sidebar-footer {
+    padding: 0 15px;
+}
+
+.logout-btn-sidebar {
+    width: 100%;
+    padding: 14px;
+    background-color: transparent;
+    border: none;
+    color: #a3aed1;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.logout-btn-sidebar:hover {
+    color: #ef4444;
+}
+
+/* === CONTENIDO PRINCIPAL: PANEL FLOTANTE === */
+.main-content {
+    flex: 1;
+    /* EL SECRETO: Fondo gris-azulado claro para que las tarjetas blancas resalten */
+    background-color: #f4f7fe; 
+    margin: 20px 20px 20px 0; 
+    border-radius: 40px; /* Súper redondeado */
+    padding: 40px 50px;
+    box-shadow: -10px 10px 40px rgba(112, 144, 176, 0.08); 
+    overflow-y: auto;
+    height: calc(100vh - 40px); 
+}
+
+
+/* =========================================
+   ESTILOS DE LAS TARJETAS Y ELEMENTOS
+   ========================================= */
+
+/* --- TOP BAR --- */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff; /* Buscador blanco */
+    border-radius: 50px; /* Estilo píldora total */
+    padding: 12px 25px;
+    width: 350px;
+    box-shadow: 0 4px 15px rgba(112, 144, 176, 0.05); /* Sombra difusa */
+    transition: box-shadow 0.2s;
+}
+
+.search-bar:focus-within {
+    box-shadow: 0 4px 20px rgba(67, 24, 255, 0.1);
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    margin-left: 10px;
+    width: 100%;
+    font-size: 0.95rem;
+    color: #2b3674;
+}
+
+.top-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-btn {
+    background-color: #ffffff; 
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #a3aed1;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(112, 144, 176, 0.05);
+    transition: transform 0.2s, color 0.2s;
+}
+
+.icon-btn:hover {
+    transform: scale(1.05);
+    color: #4318ff;
+}
+
+.profile-img-placeholder.small {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #4318ff; 
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(67, 24, 255, 0.2);
+}
+
+/* --- CONTENEDOR DE PROYECTOS Y TARJETAS BLANCAS --- */
+.dashboard-container {
+    max-width: 1100px;
+}
+
+/* NUEVO: Títulos por fuera de las tarjetas */
+.section-title {
+    color: #2b3674;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.dashboard-container > .section-title:first-child {
+    margin-top: 0;
+}
+
+/* ACÁ ESTÁ EL ESTILO DE CAJA DE TU IMAGEN */
+.create-project-section,
+.project-card,
+.tasks-section {
+    background-color: #ffffff; /* Blanco puro */
+    padding: 30px;
+    border-radius: 24px; /* Súper redonditas */
+    margin-bottom: 30px;
+    /* Sombra azulada muy suave y difusa en vez de bordes */
+    box-shadow: 0 14px 30px rgba(112, 144, 176, 0.08); 
+    border: none; /* Cero bordes duros */
+}
+
+/* --- FORMULARIOS E INPUTS INTERNOS --- */
+.create-project-form,
+.add-task-form {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px; /* Reducido un poco para compensar el título externo */
+}
+
+.create-project-form input,
+.add-task-form input,
+.project-select {
+    flex-grow: 1;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    background-color: #f4f7fe; /* Inputs con el color del fondo general */
+    color: #2b3674;
+    font-weight: 500;
+    transition: box-shadow 0.2s;
+}
+
+.create-project-form input:focus,
+.add-task-form input:focus,
+.project-select:focus {
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 2px #4318ff;
+}
+
+.add-btn {
+    background-color: #4318ff; /* Color primario vibrante */
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 15px rgba(67, 24, 255, 0.25);
+}
+
+.add-btn:hover { 
+    background-color: #3311db; 
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(67, 24, 255, 0.35);
+}
+
+/* --- GRILLA DE PROYECTOS --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 25px;
+}
+
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(112, 144, 176, 0.12);
+}
+
+.project-card h3 {
+    margin: 0 0 8px 0;
+    color: #2b3674;
+    font-size: 1.2rem;
+}
+
+.project-card p {
+    color: #a3aed1;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.view-link {
+    display: inline-block;
+    color: #4318ff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    background-color: #f4f7fe;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.view-link:hover {
+    background-color: #e0e7ff;
+}
+
+/* =========================================
+   ESTILOS DE "MIS TAREAS" Y DRAG & DROP
+   ========================================= */
+
+.add-task-form {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f4f7fe;
+}
+
+.project-select {
+    flex: 1;
+    color: #a3aed1;
+}
+
+.task-project-badge {
+    background-color: #e0e7ff;
+    color: #4318ff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Cada tarea también es una tarjeta flotante sutil */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px; 
+    background-color: #ffffff; 
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(112, 144, 176, 0.05); /* Sombra difusa */
+    transition: all 0.2s ease;
+    cursor: grab;
+}
+
+.task-item:hover:not(.is-dragging) {
+    box-shadow: 0 8px 25px rgba(112, 144, 176, 0.1);
+    transform: translateY(-2px);
+}
+
+.task-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.drag-handle {
+    color: #cbd5e1;
+    margin-right: 5px;
+}
+
+.task-checkbox {
+    width: 22px; 
+    height: 22px;
+    cursor: pointer;
+    accent-color: #4318ff;
+}
+
+.task-title {
+    color: #2b3674;
+    font-weight: 700; 
+    font-size: 1rem;
+}
+
+.task-date {
+    font-size: 0.85rem;
+    color: #a3aed1;
+    background-color: #f4f7fe; 
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.task-item.completed {
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+.task-item.completed .task-title {
+    text-decoration: line-through;
+}
+
+.task-item.is-dragging {
+    background-color: #ffffff;
+    border: 2px dashed #4318ff;
+    transform: scale(1.02); 
+    box-shadow: 0 15px 35px rgba(112, 144, 176, 0.15);
+}
+
+.trash-drop-zone.active {
+    border-radius: 20px;
+    padding: 30px;
+    background-color: #fef2f2;
+    border: 2px dashed #ef4444;
+    color: #ef4444;
+}
+
+.drag-hint {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #a3aed1;
+    margin-top: 25px;
+    font-weight: 500;
+}
+
+/* === POP-UP DE NOTIFICACIONES === */
+.notification-wrapper {
+    position: relative; 
+    display: flex;
+    align-items: center;
+}
+
+.notification-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 50%;
+    transform: translateX(50%);
+    margin-top: 15px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(112, 144, 176, 0.15); 
+    width: 250px;
+    font-size: 0.95rem;
+    color: #2b3674;
+    text-align: center;
+    font-weight: 600;
+    z-index: 100;
+    animation: slideDown 0.2s ease-out;
+}
+
+.notification-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 50%;
+    transform: translateX(50%) rotate(45deg);
+    width: 16px;
+    height: 16px;
+    background-color: #ffffff;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translate(50%, -10px); }
+    to { opacity: 1; transform: translate(50%, 0); }
+}
+
+.sidebar-brand a {
+    transition: opacity 0.2s ease;
+}
+
+.sidebar-brand a:hover {
+    opacity: 0.8; /* Se aclara un poquito al pasar el mouse */
+}
+
+.sidebar-brand h1 {
+    cursor: pointer;
+}

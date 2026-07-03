@@ -4,7 +4,11 @@ Frontend del TP integrador (UTN · PWA) de la app **Indigo**, una app de organiz
 
 Hecho con **React + Vite**. Consume la API del backend de Indigo.
 
-Repo del backend: `proyecto-indigo-backend`.
+- **App en producción:** https://proyecto-indigo.vercel.app
+- **API (backend):** https://proyecto-indigo-backend.onrender.com
+- **Repo del backend:** https://github.com/lucilarima/proyecto-indigo-backend
+
+> Nota: el backend usa el plan gratuito de Render y "se duerme" tras inactividad; la primera carga puede tardar ~50 segundos (arranque en frío).
 
 ## Stack
 
@@ -53,4 +57,9 @@ También podés usar el botón **"Entrar como invitado"** en la pantalla de logi
 ```
 npm run build
 ```
-Genera la carpeta `dist/` lista para desplegar (Vercel / Netlify).
+Genera la carpeta `dist/` lista para desplegar.
+
+## Deploy
+
+- **Frontend:** desplegado en [Vercel](https://vercel.com) → https://proyecto-indigo.vercel.app
+- Variable de entorno en Vercel: `VITE_API_URL=https://proyecto-indigo-backend.onrender.com/api`

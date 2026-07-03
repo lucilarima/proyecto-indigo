@@ -6,37 +6,33 @@ import Sidebar from '../components/Sidebar'; // <-- IMPORTAMOS EL COMPONENTE NUE
 import './Dashboard.css';
 
 const Dashboard = () => {
-    // Traemos los datos del contexto global
-    const { proyectos, setProyectos, tareas, setTareas } = useData();
+    // Traemos los datos y las acciones del contexto global (conectado a la API)
+    const { proyectos, tareas, crearProyecto, crearTarea, actualizarTarea, borrarTarea } = useData();
 
     // Estados locales para los formularios
     const [nuevoProyecto, setNuevoProyecto] = useState("");
     const [nuevaTarea, setNuevaTarea] = useState("");
-    const [fechaTarea, setFechaTarea] = useState(""); 
-    const [proyectoTarea, setProyectoTarea] = useState(""); 
+    const [fechaTarea, setFechaTarea] = useState("");
+    const [proyectoTarea, setProyectoTarea] = useState("");
     const [tareaArrastrada, setTareaArrastrada] = useState(null);
 
     // --- FUNCIONES DE LÓGICA ---
-    const handleCrearProyecto = (e) => {
+    const handleCrearProyecto = async (e) => {
         e.preventDefault();
         if (nuevoProyecto.trim() !== "") {
-            setProyectos([...proyectos, { id: Date.now(), nombre: nuevoProyecto }]);
+            await crearProyecto(nuevoProyecto);
             setNuevoProyecto("");
         }
     };
 
-    const handleCrearTarea = (e) => {
+    const handleCrearTarea = async (e) => {
         e.preventDefault();
         if (nuevaTarea.trim() !== "" && fechaTarea !== "") {
-            setTareas([...tareas, { 
-                id: Date.now(), 
-                titulo: nuevaTarea, 
-                fecha: fechaTarea, 
-                completada: false,
-                proyectoId: proyectoTarea ? parseInt(proyectoTarea) : null,
-                hora: "",          
-                programada: false  
-            }]);
+            await crearTarea({
+                titulo: nuevaTarea,
+                fecha: fechaTarea,
+                proyectoId: proyectoTarea || null
+            });
             setNuevaTarea("");
             setFechaTarea("");
             setProyectoTarea("");
@@ -44,7 +40,8 @@ const Dashboard = () => {
     };
 
     const toggleTarea = (id) => {
-        setTareas(tareas.map(tarea => tarea.id === id ? { ...tarea, completada: !tarea.completada } : tarea));
+        const tarea = tareas.find(t => t.id === id);
+        if (tarea) actualizarTarea(id, { completada: !tarea.completada });
     };
 
     const formatearFechaVista = (fechaISO) => {
@@ -57,11 +54,12 @@ const Dashboard = () => {
     const iniciarArrastre = (e, id) => setTareaArrastrada(id);
     const finalizarArrastre = () => setTareaArrastrada(null);
     const permitirSoltar = (e) => e.preventDefault(); 
-    const soltarEnBasura = (e) => {
+    const soltarEnBasura = async (e) => {
         e.preventDefault();
         if (tareaArrastrada) {
-            setTareas(tareas.filter(t => t.id !== tareaArrastrada));
+            const id = tareaArrastrada;
             setTareaArrastrada(null);
+            await borrarTarea(id);
         }
     };
 

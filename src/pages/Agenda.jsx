@@ -8,7 +8,7 @@ import './Agenda.css';
 const Agenda = () => {
     const { logout } = useAuth();
     const navigate = useNavigate();
-    const { proyectos, tareas, setTareas } = useData();
+    const { proyectos, tareas, actualizarTarea, borrarTarea: eliminarTarea } = useData();
 
     const hoy = new Date();
     const [fechaBase, setFechaBase] = useState(new Date(hoy.getFullYear(), hoy.getMonth(), 1));
@@ -37,30 +37,31 @@ const Agenda = () => {
     const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const nombresDias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
-    const programarTarea = (id) => {
+    const programarTarea = async (id) => {
         const horaSeleccionada = horasTemporales[id];
         if (horaSeleccionada) {
-            setTareas(tareas.map(t => t.id === id ? { ...t, hora: horaSeleccionada, fecha: fechaSeleccionadaStr, programada: true } : t));
+            await actualizarTarea(id, { hora: horaSeleccionada, fecha: fechaSeleccionadaStr, programada: true });
             setHorasTemporales({ ...horasTemporales, [id]: "" });
         }
     };
 
-    const borrarTarea = (id) => {
-        setTareas(tareas.filter(t => t.id !== id));
+    const borrarTarea = async (id) => {
         setMenuAbierto(null);
+        await eliminarTarea(id);
     };
 
-    const desprogramarTarea = (id) => {
-        setTareas(tareas.map(t => t.id === id ? { ...t, programada: false, hora: "" } : t));
+    const desprogramarTarea = async (id) => {
         setMenuAbierto(null);
+        await actualizarTarea(id, { programada: false, hora: "" });
     };
 
     const iniciarEdicion = (tarea, campo) => setEditando({ id: tarea.id, campo, valorTemp: tarea[campo] });
 
-    const guardarEdicion = () => {
+    const guardarEdicion = async () => {
         if (editando) {
-            setTareas(tareas.map(t => t.id === editando.id ? { ...t, [editando.campo]: editando.valorTemp } : t));
+            const { id, campo, valorTemp } = editando;
             setEditando(null);
+            await actualizarTarea(id, { [campo]: valorTemp });
         }
     };
 

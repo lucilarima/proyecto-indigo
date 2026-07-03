@@ -7,14 +7,25 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useAuth();
+    const [error, setError] = useState('');
+    const [cargando, setCargando] = useState(false);
+    const [registrado, setRegistrado] = useState(null); // guarda datos post-registro (incluye link de verificación)
+    const { register } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Simulamos el registro e inicio de sesión
-        login({ name, email });
-        navigate('/dashboard');
+        setError('');
+        setCargando(true);
+        try {
+            const usuario = await register(name, email, password);
+            // Si el backend no tiene mail configurado, devuelve verification_url para poder verificar acá mismo.
+            setRegistrado(usuario);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setCargando(false);
+        }
     };
 
     return (
@@ -48,39 +59,60 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <form className="card-body" onSubmit={handleSubmit}>
-                        <h3 className="card-title">Nueva Cuenta</h3>
-                        <p className="card-description">Organizá tus proyectos hoy mismo.</p>
+                    {registrado ? (
+                        <div className="card-body">
+                            <h3 className="card-title">¡Cuenta creada! 🎉</h3>
+                            <p className="card-description">
+                                Te registramos con éxito. Verificá tu email para poder iniciar sesión.
+                            </p>
+                            {registrado.verification_url && (
+                                <a href={registrado.verification_url} target="_blank" rel="noreferrer" className="glass-button" style={{ textAlign: 'center', textDecoration: 'none', display: 'block' }}>
+                                    Verificar mi cuenta ahora
+                                </a>
+                            )}
+                            <button type="button" className="glass-button" onClick={() => navigate('/login')} style={{ marginTop: '10px', opacity: 0.85 }}>
+                                Ir a iniciar sesión
+                            </button>
+                        </div>
+                    ) : (
+                        <form className="card-body" onSubmit={handleSubmit}>
+                            <h3 className="card-title">Nueva Cuenta</h3>
+                            <p className="card-description">Organizá tus proyectos hoy mismo.</p>
 
-                        <input
-                            type="text"
-                            className="glass-input"
-                            placeholder="Tu nombre completo"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
+                            <input
+                                type="text"
+                                className="glass-input"
+                                placeholder="Tu nombre completo"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
 
-                        <input
-                            type="email"
-                            className="glass-input"
-                            placeholder="Email de trabajo"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+                            <input
+                                type="email"
+                                className="glass-input"
+                                placeholder="Email de trabajo"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
 
-                        <input
-                            type="password"
-                            className="glass-input"
-                            placeholder="Contraseña segura"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                            <input
+                                type="password"
+                                className="glass-input"
+                                placeholder="Contraseña segura (mín. 6 caracteres)"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
 
-                        <button type="submit" className="glass-button">Empezar ahora</button>
-                    </form>
+                            {error && <p style={{ color: '#ffdddd', background: 'rgba(220,38,38,0.35)', padding: '8px 12px', borderRadius: '8px', margin: '0', fontSize: '0.9rem' }}>{error}</p>}
+
+                            <button type="submit" className="glass-button" disabled={cargando}>
+                                {cargando ? 'Creando...' : 'Empezar ahora'}
+                            </button>
+                        </form>
+                    )}
 
                     <p className="card-tip">
                         ¿Ya tenés cuenta? <Link to="/login" className="glass-link">Iniciá sesión</Link>

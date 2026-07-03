@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard'
 import ProjectDetail from './pages/ProjectDetail'
 import Agenda from './pages/Agenda'
 import Mensajes from './pages/Mensajes' // <-- IMPORTAMOS LA NUEVA PÁGINA DE MENSAJES
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -20,10 +21,10 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} /> 
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/agenda" element={<Agenda />} />
-            <Route path="/mensajes" element={<Mensajes />} /> {/* <-- AGREGAMOS LA RUTA */}
-            <Route path="/proyecto/:id" element={<ProjectDetail />} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/agenda" element={<ProtectedRoute><Agenda /></ProtectedRoute>} />
+            <Route path="/mensajes" element={<ProtectedRoute><Mensajes /></ProtectedRoute>} /> {/* <-- AGREGAMOS LA RUTA */}
+            <Route path="/proyecto/:id" element={<ProtectedRoute><ProjectDetail /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </BrowserRouter>

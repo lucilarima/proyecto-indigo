@@ -6,14 +6,36 @@ import './Login.css';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useAuth();
+    const [error, setError] = useState('');
+    const [cargando, setCargando] = useState(false);
+    const { login, loginInvitado } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Simulamos el login y vamos al dashboard
-        login({ name: email.split('@')[0], email });
-        navigate('/dashboard');
+        setError('');
+        setCargando(true);
+        try {
+            await login(email, password);
+            navigate('/dashboard');
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setCargando(false);
+        }
+    };
+
+    const handleInvitado = async () => {
+        setError('');
+        setCargando(true);
+        try {
+            await loginInvitado();
+            navigate('/dashboard');
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setCargando(false);
+        }
     };
 
     return (
@@ -67,8 +89,16 @@ const Login = () => {
                             required
                         />
 
-                        <button type="submit" className="glass-button">Entrar a Indigo</button>
+                        {error && <p style={{ color: '#ffdddd', background: 'rgba(220,38,38,0.35)', padding: '8px 12px', borderRadius: '8px', margin: '0', fontSize: '0.9rem' }}>{error}</p>}
+
+                        <button type="submit" className="glass-button" disabled={cargando}>
+                            {cargando ? 'Ingresando...' : 'Entrar a Indigo'}
+                        </button>
                     </form>
+
+                    <button type="button" className="glass-button" onClick={handleInvitado} disabled={cargando} style={{ marginTop: '10px', opacity: 0.85 }}>
+                        Entrar como invitado
+                    </button>
 
                     <p className="card-tip">
                         ¿No tenés cuenta? <Link to="/register" className="glass-link">Creala acá</Link>

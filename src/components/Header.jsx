@@ -9,7 +9,7 @@ const Header = () => {
     // Estado propio para abrir/cerrar las notificaciones
     const [mostrarNotificaciones, setMostrarNotificaciones] = useState(false);
 
-    const inicialUsuario = user && user.name ? user.name.charAt(0).toUpperCase() : 'L';
+    const inicialUsuario = user && user.nombre ? user.nombre.charAt(0).toUpperCase() : 'L';
 
     return (
         <header className="top-bar">

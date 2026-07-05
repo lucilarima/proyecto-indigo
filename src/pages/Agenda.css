@@ -405,3 +405,58 @@
 .dropdown-menu button.danger-text:hover {
     background-color: #fef2f2;
 }
+
+/* =========================================
+   RESPONSIVE AGENDA
+   ========================================= */
+@media (max-width: 900px) {
+    .agenda-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .timeline-header {
+        margin-bottom: 25px;
+    }
+
+    .timeline-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .time-label {
+        width: 45px;
+        font-size: 0.75rem;
+    }
+
+    .time-line {
+        margin-right: 12px;
+    }
+
+    .scheduled-card {
+        padding: 15px 18px;
+    }
+
+    .mini-calendar {
+        padding: 18px;
+    }
+
+    .calendar-grid {
+        gap: 4px;
+    }
+
+    .calendar-grid span {
+        width: 30px;
+        height: 30px;
+    }
+
+    /* Botón "Programar" y select apilados */
+    .schedule-actions {
+        flex-direction: column;
+    }
+
+    .btn-programar {
+        width: 100%;
+    }
+}

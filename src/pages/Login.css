@@ -199,3 +199,26 @@
 .glass-link:hover {
     text-decoration: underline;
 }
+
+/* =========================================
+   RESPONSIVE LOGIN / REGISTRO
+   ========================================= */
+@media (max-width: 480px) {
+    .login-page {
+        padding: 16px;
+    }
+
+    .glass-card {
+        width: 100%;
+        max-width: 400px;
+        min-height: 0;
+    }
+
+    .card-content {
+        padding: 24px 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+}

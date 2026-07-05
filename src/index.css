@@ -1,0 +1,21 @@
+/* Reset base global para que el responsive funcione en todas las pantallas (2000px → 320px) */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#root {
+    max-width: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

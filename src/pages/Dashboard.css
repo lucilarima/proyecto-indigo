@@ -479,3 +479,156 @@
 .sidebar-brand h1 {
     cursor: pointer;
 }
+
+/* =========================================
+   RESPONSIVE (2000px → 320px)
+   ========================================= */
+
+/* --- Tablet / pantallas medianas --- */
+@media (max-width: 1024px) {
+    .main-content {
+        padding: 30px 30px;
+    }
+
+    .search-bar {
+        width: 260px;
+    }
+}
+
+/* --- Mobile: el sidebar pasa a ser una barra superior horizontal --- */
+@media (max-width: 900px) {
+    .app-layout {
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 12px;
+        gap: 8px;
+        overflow-x: auto;
+    }
+
+    .sidebar-brand {
+        margin-bottom: 0;
+        padding: 0 8px;
+        flex-shrink: 0;
+    }
+
+    .sidebar-brand h1 {
+        font-size: 1.5rem;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        gap: 4px;
+        padding: 0 4px;
+        overflow-x: auto;
+    }
+
+    .nav-item {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .sidebar-footer {
+        padding: 0 4px;
+        flex-shrink: 0;
+    }
+
+    .logout-btn-sidebar {
+        width: auto;
+        padding: 10px 14px;
+    }
+
+    .main-content {
+        margin: 10px;
+        border-radius: 24px;
+        padding: 24px 20px;
+        height: auto;
+        min-height: calc(100vh - 20px);
+    }
+
+    .dashboard-container,
+    .agenda-grid,
+    .chat-container-main {
+        max-width: 100%;
+    }
+
+    /* La barra superior se apila y el buscador ocupa el ancho completo */
+    .top-bar {
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .search-bar {
+        width: 100%;
+        order: 2;
+    }
+
+    .top-bar-actions {
+        order: 1;
+        margin-left: auto;
+    }
+
+    /* Formularios internos en columna para que entren */
+    .add-task-form,
+    .create-project-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .add-btn {
+        width: 100%;
+    }
+
+    /* Grilla de proyectos a una sola columna */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
+/* --- Teléfonos chicos --- */
+@media (max-width: 480px) {
+    .main-content {
+        margin: 6px;
+        padding: 18px 14px;
+        border-radius: 18px;
+    }
+
+    .section-title {
+        font-size: 1.15rem;
+    }
+
+    .create-project-section,
+    .project-card,
+    .tasks-section {
+        padding: 20px 16px;
+        border-radius: 18px;
+    }
+
+    .task-item {
+        padding: 14px 16px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .task-info {
+        gap: 10px;
+    }
+
+    .task-title {
+        font-size: 0.9rem;
+    }
+
+    .icon-btn,
+    .profile-img-placeholder.small {
+        width: 42px;
+        height: 42px;
+    }
+}

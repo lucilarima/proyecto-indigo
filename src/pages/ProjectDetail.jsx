@@ -3,7 +3,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useData } from '../context/DataContext'; 
 import Header from '../components/Header';
-import './Dashboard.css'; 
+import Sidebar from '../components/Sidebar';
+import './Dashboard.css';
 
 const ProjectDetail = () => {
     const { id } = useParams();
@@ -43,18 +44,7 @@ const ProjectDetail = () => {
 
     return (
         <div className="app-layout">
-            <aside className="sidebar">
-                <div className="sidebar-brand"><h1>Indigo.</h1></div>
-                <nav className="sidebar-nav">
-                    <Link to="/dashboard" className="nav-item"><span>🏠</span> Dashboard</Link>
-                    <Link to="/agenda" className="nav-item"><span>📅</span> Agenda</Link>
-                    <Link to="/mensajes" className="nav-item"><span>💬</span> Mensajes</Link>
-                    <Link to="/configuracion" className="nav-item"><span>⚙️</span> Configuración</Link>
-                </nav>
-                <div className="sidebar-footer">
-                    <button className="logout-btn-sidebar" onClick={handleLogout}><span>🚪</span> Log out</button>
-                </div>
-            </aside>
+            <Sidebar />
 
             <main className="main-content">
                 <Header />

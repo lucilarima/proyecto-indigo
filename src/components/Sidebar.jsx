@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -6,6 +6,7 @@ const Sidebar = () => {
     const { logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const handleLogout = () => {
         logout();
@@ -13,18 +14,29 @@ const Sidebar = () => {
     };
 
     const isActive = (path) => location.pathname === path ? 'active' : '';
+    const cerrarMenu = () => setMenuOpen(false);
 
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${menuOpen ? 'is-open' : ''}`}>
             <div className="sidebar-brand">
-                {/* IMPORTANTE: El Link tiene que envolver el contenido.
-                */}
-                <Link to="/dashboard" style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                <Link to="/dashboard" style={{ textDecoration: 'none', cursor: 'pointer' }} onClick={cerrarMenu}>
                     <h1>Indigo.</h1>
                 </Link>
             </div>
-            
-            <nav className="sidebar-nav">
+
+            {/* Botón hamburguesa: solo visible en mobile */}
+            <button
+                className={`sidebar-hamburger ${menuOpen ? 'active' : ''}`}
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Abrir menú"
+                aria-expanded={menuOpen}
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav className="sidebar-nav" onClick={cerrarMenu}>
                 <Link to="/dashboard" className={`nav-item ${isActive('/dashboard')}`}>
                     <span>🏠</span> Dashboard
                 </Link>
